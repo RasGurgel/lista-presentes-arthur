@@ -1,7 +1,7 @@
 "use client";
 
 import { Gift } from "@/types";
-import { Button } from "@/components/ui/button";
+import Button from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
