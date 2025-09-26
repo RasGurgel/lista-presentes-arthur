@@ -11,11 +11,9 @@ export default defineConfig(() => ({
   plugins: [dyadComponentTagger(), react()],
   resolve: {
     alias: {
-      // Corrigi o erro de digitação de _dirname para __dirname
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  // Adicionando a configuração de build para a Vercel
   build: {
     rollupOptions: {
       input: path.resolve(__dirname, "index.html"),
