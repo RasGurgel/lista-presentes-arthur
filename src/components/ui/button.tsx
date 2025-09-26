@@ -32,4 +32,4 @@ const buttonVariants = cva(
     },
   },
 );
-export default Button;
+export { Button, buttonVariants };

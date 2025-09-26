@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import Button from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Gift as GiftIcon, ShoppingCart, CheckCircle2 } from "lucide-react";
 import { ReserveGiftDialog } from "./ReserveGiftDialog";
