@@ -1,7 +1,7 @@
 "use client";
 
 import { Gift } from "@/types";
-import { Button } from "@/components/ui/button";
+import Button from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -108,7 +108,7 @@ export const AdminGiftList = ({ gifts }: AdminGiftListProps) => {
                     <Undo2 className="mr-2 h-4 w-4" /> Desfazer Reserva
                   </Button>
                 )}
-                 {gift.is_purchased && (
+                {gift.is_purchased && (
                   <Button variant="outline" size="sm" onClick={() => handleUndoPurchase(gift.id)}>
                     <Undo2 className="mr-2 h-4 w-4" /> Desfazer Compra
                   </Button>

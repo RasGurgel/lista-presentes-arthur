@@ -1,7 +1,7 @@
 "use client";
 
 import { Gift } from "@/types";
-import { Button } from "@/components/ui/button";
+import Button from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -16,7 +16,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "./ui/use-toast";
+import { showSuccess, showError } from "@/utils/toast";
 
 interface ReserveGiftDialogProps {
   gift: Gift;
@@ -29,11 +29,10 @@ export const ReserveGiftDialog = ({ gift, children, disabled }: ReserveGiftDialo
   const [name, setName] = useState("");
   const [note, setNote] = useState("");
   const [loading, setLoading] = useState(false);
-  const { toast } = useToast();
 
   const handleReserve = async () => {
     if (!name.trim()) {
-      toast({ title: "Opa!", description: "Por favor, preencha seu nome.", variant: "destructive" });
+      showError("Por favor, preencha seu nome.");
       return;
     }
     setLoading(true);
@@ -51,24 +50,18 @@ export const ReserveGiftDialog = ({ gift, children, disabled }: ReserveGiftDialo
     setLoading(false);
 
     if (error) {
-      toast({ title: "Erro no servidor", description: "Não foi possível reservar o presente. Tente novamente.", variant: "destructive" });
-      return; // Mantém o pop-up aberto em caso de erro para o usuário tentar novamente.
+      showError("Não foi possível reservar o presente. Tente novamente.");
+      return;
     }
 
-    // Se não houve erro, a operação terminou. O pop-up deve fechar.
-    // Apenas a mensagem para o usuário mudará dependendo do resultado.
-
     if (count === 0) {
-      // O presente foi reservado por outra pessoa enquanto o pop-up estava aberto.
-      toast({ title: "Opa! Tarde demais!", description: "Este presente já foi reservado por outra pessoa.", variant: "destructive" });
+      showError("Opa! Este presente já foi reservado por outra pessoa.");
     } else {
-      // Sucesso!
-      toast({ title: "Presente reservado!", description: `Obrigado, ${name}! Agora você pode comprar o presente.` });
+      showSuccess(`Presente reservado! Obrigado, ${name}!`);
       setName("");
       setNote("");
     }
 
-    // Fecha o pop-up em ambos os casos (sucesso ou "tarde demais").
     setOpen(false);
   };
 
